@@ -1,3 +1,5 @@
+use std::path::Path;
+
 use bevy::{app::AppExit, prelude::*, ecs::system::Resource};
 
 use super::{despawn_screen, DisplayQuality, GameState, Volume, TEXT_COLOR};
@@ -153,7 +155,9 @@ fn menu_setup(mut menu_state: ResMut<State<MenuState>>) {
 }
 
 fn main_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let font = asset_server.load("fonts\\fira-sans.bold.ttf");
+    let font_path = Path::new("fonts").join("fira-sans.bold.ttf");
+    let font = asset_server.load(font_path);
+
     // Common style for all buttons on the screen
     let button_style = Style {
         size: Size::new(Val::Px(250.0), Val::Px(65.0)),
@@ -222,7 +226,8 @@ fn main_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                 })
                 .insert(MenuButtonAction::Play)
                 .with_children(|parent| {
-                    let icon = asset_server.load("images/icons/right.png");
+                    let icon_path =  Path::new("images").join("icons").join("right.png");
+                    let icon = asset_server.load(icon_path);
                     parent.spawn_bundle(ImageBundle {
                         style: button_icon_style.clone(),
                         image: UiImage(icon),
@@ -241,7 +246,8 @@ fn main_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                 })
                 .insert(MenuButtonAction::Settings)
                 .with_children(|parent| {
-                    let icon = asset_server.load("images/icons/wrench.png");
+                    let icon_path =  Path::new("images").join("icons").join("wrench.png");
+                    let icon = asset_server.load(icon_path);
                     parent.spawn_bundle(ImageBundle {
                         style: button_icon_style.clone(),
                         image: UiImage(icon),
@@ -260,7 +266,8 @@ fn main_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                 })
                 .insert(MenuButtonAction::Quit)
                 .with_children(|parent| {
-                    let icon = asset_server.load("images/icons/exitRight.png");
+                    let icon_path =  Path::new("images").join("icons").join("exitRight.png");
+                    let icon = asset_server.load(icon_path);
                     parent.spawn_bundle(ImageBundle {
                         style: button_icon_style,
                         image: UiImage(icon),
@@ -279,9 +286,9 @@ fn settings_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         align_items: AlignItems::Center,
         ..default()
     };
-
+    let font_path = Path::new("fonts").join("fira-sans.bold.ttf");
     let button_text_style = TextStyle {
-        font: asset_server.load("fonts\\fira-sans.bold.ttf"),
+        font: asset_server.load(font_path),
         font_size: 40.0,
         color: TEXT_COLOR,
     };
@@ -333,8 +340,9 @@ fn display_settings_menu_setup(
         align_items: AlignItems::Center,
         ..default()
     };
+    let font_path = Path::new("fonts").join("fira-sans.bold.ttf");
     let button_text_style = TextStyle {
-        font: asset_server.load("fonts\\fira-sans.bold.ttf"),
+        font: asset_server.load(font_path),
         font_size: 40.0,
         color: TEXT_COLOR,
     };
@@ -420,8 +428,9 @@ fn sound_settings_menu_setup(
         align_items: AlignItems::Center,
         ..default()
     };
+    let font_path = Path::new("fonts").join("fira-sans.bold.ttf");
     let button_text_style = TextStyle {
-        font: asset_server.load("fonts\\fira-sans.bold.ttf"),
+        font: asset_server.load(font_path),
         font_size: 40.0,
         color: TEXT_COLOR,
     };

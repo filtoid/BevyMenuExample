@@ -1,3 +1,4 @@
+use std::path::Path;
 use bevy::prelude::*;
 
 use super::{despawn_screen, DisplayQuality, GameState, Volume, TEXT_COLOR};
@@ -29,7 +30,8 @@ fn game_setup(
     display_quality: Res<DisplayQuality>,
     volume: Res<Volume>,
 ) {
-    let font = asset_server.load("fonts\\fira-sans.bold.ttf");
+    let font_path = Path::new("fonts").join("fira-sans.bold.ttf");
+    let font = asset_server.load(font_path);
 
     commands
         // First create a `NodeBundle` for centering what we want to display

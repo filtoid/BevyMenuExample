@@ -1,3 +1,4 @@
+use std::path::Path;
 use bevy::prelude::*;
 
 use super::{despawn_screen, GameState};
@@ -30,7 +31,8 @@ struct OnSplashScreen;
 struct SplashTimer(Timer);
 
 fn splash_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let icon = asset_server.load("images\\branding\\icon.png");
+    let icon_path = Path::new("images").join("branding").join("icon.png");
+    let icon = asset_server.load(icon_path);
     // Display the logo
     commands
         .spawn_bundle(ImageBundle {
