@@ -21,7 +21,7 @@ impl Plugin for GamePlugin {
 #[derive(Component)]
 struct OnGameScreen;
 
-#[derive(Deref, DerefMut)]
+#[derive(Deref, DerefMut, Resource)]
 struct GameTimer(Timer);
 
 fn game_setup(
@@ -35,7 +35,7 @@ fn game_setup(
 
     commands
         // First create a `NodeBundle` for centering what we want to display
-        .spawn_bundle(NodeBundle {
+        .spawn(NodeBundle {
             style: Style {
                 // This will center the current node
                 margin: UiRect::all(Val::Auto),
@@ -48,13 +48,13 @@ fn game_setup(
                 align_items: AlignItems::Center,
                 ..default()
             },
-            color: Color::BLACK.into(),
+            background_color: Color::BLACK.into(),
             ..default()
         })
         .insert(OnGameScreen)
         .with_children(|parent| {
             // Display two lines of text, the second one with the current settings
-            parent.spawn_bundle(
+            parent.spawn(
                 TextBundle::from_section(
                     "Will be back to the menu shortly...",
                     TextStyle {
@@ -68,7 +68,7 @@ fn game_setup(
                     ..default()
                 }),
             );
-            parent.spawn_bundle(
+            parent.spawn(
                 TextBundle::from_sections([
                     TextSection::new(
                         format!("quality: {:?}", *display_quality),
@@ -102,7 +102,7 @@ fn game_setup(
             );
         });
     // Spawn a 5 seconds timer to trigger going back to the menu
-    commands.insert_resource(GameTimer(Timer::from_seconds(5.0, false)));
+    commands.insert_resource(GameTimer(Timer::from_seconds(5.0, TimerMode::Once)));
 }
 
 // Tick the timer, and change state when finished

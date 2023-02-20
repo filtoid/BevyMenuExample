@@ -15,7 +15,7 @@ enum GameState {
 }
 
 // One of the two settings that can be set through the menu. It will be a resource in the app
-#[derive(Debug, Component, PartialEq, Eq, Clone, Copy)]
+#[derive(Debug, Component, PartialEq, Eq, Clone, Copy, Resource)]
 enum DisplayQuality {
     Low,
     Medium,
@@ -23,7 +23,7 @@ enum DisplayQuality {
 }
 
 // One of the two settings that can be set through the menu. It will be a resource in the app
-#[derive(Debug, Component, PartialEq, Eq, Clone, Copy)]
+#[derive(Debug, Component, PartialEq, Eq, Clone, Copy, Resource)]
 struct Volume(u32);
 
 fn main() {
@@ -43,7 +43,7 @@ fn main() {
 }
 
 fn setup(mut commands: Commands) {
-    commands.spawn_bundle(Camera2dBundle::default());
+    commands.spawn(Camera2dBundle::default());
 }
 
 // Generic system that takes a component as a parameter, and will despawn all entities with that component

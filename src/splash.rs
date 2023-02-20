@@ -27,7 +27,7 @@ impl Plugin for SplashPlugin {
 struct OnSplashScreen;
 
 // Newtype to use a `Timer` for this screen as a resource
-#[derive(Deref, DerefMut)]
+#[derive(Deref, DerefMut, Resource)]
 struct SplashTimer(Timer);
 
 fn splash_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
@@ -35,7 +35,7 @@ fn splash_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     let icon = asset_server.load(icon_path);
     // Display the logo
     commands
-        .spawn_bundle(ImageBundle {
+        .spawn(ImageBundle {
             style: Style {
                 // This will center the logo
                 margin: UiRect::all(Val::Auto),
@@ -48,7 +48,7 @@ fn splash_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         })
         .insert(OnSplashScreen);
     // Insert the timer as a resource
-    commands.insert_resource(SplashTimer(Timer::from_seconds(1.0, false)));
+    commands.insert_resource(SplashTimer(Timer::from_seconds(1.0, TimerMode::Once)));
 }
 
 // Tick the timer, and change state when finished
