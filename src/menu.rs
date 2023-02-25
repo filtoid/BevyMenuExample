@@ -189,7 +189,7 @@ fn main_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         .spawn(NodeBundle {
             style: Style {
                 margin: UiRect::all(Val::Auto),
-                flex_direction: FlexDirection::ColumnReverse,
+                flex_direction: FlexDirection::Column,
                 align_items: AlignItems::Center,
                 ..default()
             },
@@ -297,7 +297,7 @@ fn settings_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         .spawn(NodeBundle {
             style: Style {
                 margin: UiRect::all(Val::Auto),
-                flex_direction: FlexDirection::ColumnReverse,
+                flex_direction: FlexDirection::Column,
                 align_items: AlignItems::Center,
                 ..default()
             },
@@ -351,7 +351,7 @@ fn display_settings_menu_setup(
         .spawn(NodeBundle {
             style: Style {
                 margin: UiRect::all(Val::Auto),
-                flex_direction: FlexDirection::ColumnReverse,
+                flex_direction: FlexDirection::Column,
                 align_items: AlignItems::Center,
                 ..default()
             },
@@ -439,7 +439,7 @@ fn sound_settings_menu_setup(
         .spawn(NodeBundle {
             style: Style {
                 margin: UiRect::all(Val::Auto),
-                flex_direction: FlexDirection::ColumnReverse,
+                flex_direction: FlexDirection::Column,
                 align_items: AlignItems::Center,
                 ..default()
             },
